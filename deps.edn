@@ -1,7 +1,7 @@
 
 {:paths ["source-code/cljs"]
  :deps  {mt-extensions/re-frame-extra {:git/url "https://github.com/mt-extensions/re-frame-extra"
-                                       :sha     "868d68742763ed846b9d6c6fe5cbe70c11cff68a"}
+                                       :sha     "8af4f771cd19a5d8be54ee4e9068e486008c3802"}
          org.clojure/clojurescript     {:mvn/version "1.10.891"}}}
 
 ; + pretty-presets
