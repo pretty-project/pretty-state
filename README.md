@@ -3,7 +3,7 @@
 
 ### Overview
 
-The <strong>pretty-state</strong> is a set of presets for Pretty elements and inputs implementing the [day8 / re-frame](github.com/day8/re-frame) framework.
+The <strong>pretty-state</strong> is a set of presets for Pretty UI implementing the [day8 / re-frame](https://github.com/day8/re-frame) framework.
 
 ### deps.edn
 

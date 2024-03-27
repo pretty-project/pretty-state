@@ -8,14 +8,14 @@
 
 (defn dispatch-focus-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-focus-events' preset.
   ;
   ; @description
-  ; Dispatches focus events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches focus events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-blur-e (Re-Frame metamorphic event)(opt)
@@ -44,14 +44,14 @@
 
 (defn dispatch-image-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-image-events' preset.
   ;
   ; @description
-  ; Dispatches image events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches image events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-error-e (Re-Frame metamorphic event)(opt)
@@ -77,14 +77,14 @@
 
 (defn dispatch-input-field-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-input-field-events' preset.
   ;
   ; @description
-  ; Dispatches input field events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches input field events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-change-e (Re-Frame metamorphic event)(opt)
@@ -119,14 +119,14 @@
 
 (defn dispatch-input-numeric-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-input-numeric-events' preset.
   ;
   ; @description
-  ; Dispatches input numeric events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches input numeric events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-decreased-e (Re-Frame metamorphic event)(opt)
@@ -155,14 +155,14 @@
 
 (defn dispatch-input-option-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-input-option-events' preset.
   ;
   ; @description
-  ; Dispatches input option events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches input option events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-selected-e (Re-Frame metamorphic event)(opt)
@@ -191,14 +191,14 @@
 
 (defn dispatch-input-validation-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-input-validation-events' preset.
   ;
   ; @description
-  ; Dispatches input validation events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches input validation events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-invalid-e (Re-Frame metamorphic event)(opt)
@@ -227,14 +227,14 @@
 
 (defn dispatch-input-value-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-input-value-events' preset.
   ;
   ; @description
-  ; Dispatches input value events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches input value events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:set-value-e (Re-Frame metamorphic event)(opt)
@@ -260,14 +260,14 @@
 
 (defn dispatch-keypress-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-keypress-events' preset.
   ;
   ; @description
-  ; Dispatches keypress events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches keypress events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-arrow-down-e (Re-Frame metamorphic event)(opt)
@@ -308,14 +308,14 @@
 
 (defn dispatch-lifecycle-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-lifecycle-events' preset.
   ;
   ; @description
-  ; Dispatches lifecycle events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches lifecycle events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-mount-e (Re-Frame metamorphic event)(opt)
@@ -344,14 +344,14 @@
 
 (defn dispatch-mouse-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-mouse-events' preset.
   ;
   ; @description
-  ; Dispatches mouse events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches mouse events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:on-click-e (Re-Frame metamorphic event)(opt)
@@ -392,14 +392,14 @@
 
 (defn dispatch-react-events
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/dispatch-react-events' preset.
   ;
   ; @description
-  ; Dispatches react events as [Re-Frame metamorphic events](mt-extensions.github.io/re-frame-extra).
+  ; Dispatches react events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
   ; {:set-reference-e (Re-Frame metamorphic event)(opt)
@@ -425,8 +425,8 @@
 
 (defn subscribe-to-input-field-value
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/subscribe-to-input-field-value' preset.
@@ -466,8 +466,8 @@
 
 (defn subscribe-to-input-options
   ; @links
-  ; [day8 / re-frame](github.com/day8/re-frame)
-  ; [mt-extensions / re-frame-extra](github.com/mt-extensions/re-frame-extra)
+  ; [day8 / re-frame](https://github.com/day8/re-frame)
+  ; [mt-extensions / re-frame-extra](https://github.com/mt-extensions/re-frame-extra)
   ;
   ; @note
   ; Registered as ':pretty-state/subscribe-to-input-options' preset.
