@@ -1,7 +1,8 @@
 
 (ns pretty-state.presets
     (:require [pretty-presets.api :as pretty-presets]
-              [re-frame.extra.api :as r]))
+              [re-frame.extra.api :as r]
+              [fruits.hiccup.api :as hiccup]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -33,9 +34,10 @@
   ;  :on-focus-f (function)
   ;  ...}
   [{:keys [on-blur-e on-focus-e] :as props}]
-  (merge (if on-blur-e  {:on-blur-f   #(r/dispatch on-blur-e)})
-         (if on-focus-e {:on-focus-f  #(r/dispatch on-focus-e)})
-         (-> props)))
+  ; @note (#5671)
+  ; 'set-*' and 'get-*' functions are exclusively overriden by handlers, while 'on-*' functions are extended with handlers.
+  (cond-> props on-blur-e  (hiccup/merge-event-fn :on-blur-f  #(r/dispatch on-blur-e))
+                on-focus-e (hiccup/merge-event-fn :on-focus-f #(r/dispatch on-focus-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-focus-events dispatch-focus-events)
 
@@ -67,8 +69,8 @@
   ; {:on-error-f (function)
   ;  ...}
   [{:keys [on-error-e on-unerror-e] :as props}]
-  (merge (if on-error-e {:on-error-f #(r/dispatch on-error-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-error-e (hiccup/merge-event-fn :on-error-f #(r/dispatch on-error-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-image-events dispatch-image-events)
 
@@ -106,11 +108,11 @@
   ;  :on-type-ended-f (function)
   ;  ...}
   [{:keys [on-change-e on-empty-e on-input-e on-type-ended-e] :as props}]
-  (merge (if on-change-e     {:on-change-f     #(r/dispatch on-change-e)})
-         (if on-empty-e      {:on-empty-f      #(r/dispatch on-empty-e)})
-         (if on-input-e      {:on-input-f      #(r/dispatch on-input-e)})
-         (if on-type-ended-e {:on-type-ended-f #(r/dispatch on-type-ended-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-change-e     (hiccup/merge-event-fn :on-change-f     #(r/dispatch on-change-e))
+                on-empty-e      (hiccup/merge-event-fn :on-empty-f      #(r/dispatch on-empty-e))
+                on-input-e      (hiccup/merge-event-fn :on-input-f      #(r/dispatch on-input-e))
+                on-type-ended-e (hiccup/merge-event-fn :on-type-ended-f #(r/dispatch on-type-ended-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-field-events dispatch-input-field-events)
 
@@ -144,9 +146,9 @@
   ;  :on-increased-f (function)
   ;  ...}
   [{:keys [on-decreased-e on-increased-e] :as props}]
-  (merge (if on-decreased-e {:on-decreased-f #(r/dispatch on-decreased-e)})
-         (if on-increased-e {:on-increased-f #(r/dispatch on-increased-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-decreased-e (hiccup/merge-event-fn :on-decreased-f #(r/dispatch on-decreased-e))
+                on-increased-e (hiccup/merge-event-fn :on-increased-f #(r/dispatch on-increased-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-numeric-events dispatch-input-numeric-events)
 
@@ -180,9 +182,9 @@
   ;  :on-unselected-f (function)
   ;  ...}
   [{:keys [on-selected-e on-unselected-e] :as props}]
-  (merge (if on-selected-e   {:on-selected-f   #(r/dispatch on-selected-e)})
-         (if on-unselected-e {:on-unselected-f #(r/dispatch on-unselected-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-selected-e   (hiccup/merge-event-fn :on-selected-f   #(r/dispatch on-selected-e))
+                on-unselected-e (hiccup/merge-event-fn :on-unselected-f #(r/dispatch on-unselected-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-option-events dispatch-input-option-events)
 
@@ -216,9 +218,9 @@
   ;  :on-valid-f (function)
   ;  ...}
   [{:keys [on-invalid-e on-valid-e] :as props}]
-  (merge (if on-invalid-e {:on-invalid-f #(r/dispatch on-invalid-e)})
-         (if on-valid-e   {:on-valid-f   #(r/dispatch on-valid-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-invalid-e (hiccup/merge-event-fn :on-invalid-f #(r/dispatch on-invalid-e))
+                on-valid-e   (hiccup/merge-event-fn :on-valid-f   #(r/dispatch on-valid-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-validation-events dispatch-input-validation-events)
 
@@ -250,8 +252,8 @@
   ; {:set-value-f (function)
   ;  ...}
   [{:keys [set-value-e] :as props}]
-  (merge (if set-value-e {:set-value-f #(r/dispatch set-value-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props set-value-e (assoc :set-value-f  #(r/dispatch set-value-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-value-events dispatch-input-value-events)
 
@@ -293,13 +295,13 @@
   ;  :on-escape-f (function)
   ;  ...}
   [{:keys [on-arrow-down-e on-arrow-left-e on-arrow-right-e on-arrow-up-e on-enter-e on-escape-e] :as props}]
-  (merge (if on-arrow-down-e  {:on-arrow-down-f  #(r/dispatch on-arrow-down-e)})
-         (if on-arrow-left-e  {:on-arrow-left-f  #(r/dispatch on-arrow-left-e)})
-         (if on-arrow-right-e {:on-arrow-right-f #(r/dispatch on-arrow-right-e)})
-         (if on-arrow-up-e    {:on-arrow-up-f    #(r/dispatch on-arrow-up-e)})
-         (if on-enter-e       {:on-enter-f       #(r/dispatch on-enter-e)})
-         (if on-escape-e      {:on-escape-f      #(r/dispatch on-escape-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-arrow-down-e  (hiccup/merge-event-fn :on-arrow-down-f  #(r/dispatch on-arrow-down-e))
+                on-arrow-left-e  (hiccup/merge-event-fn :on-arrow-left-f  #(r/dispatch on-arrow-left-e))
+                on-arrow-right-e (hiccup/merge-event-fn :on-arrow-right-f #(r/dispatch on-arrow-right-e))
+                on-arrow-up-e    (hiccup/merge-event-fn :on-arrow-up-f    #(r/dispatch on-arrow-up-e))
+                on-enter-e       (hiccup/merge-event-fn :on-enter-f       #(r/dispatch on-enter-e))
+                on-escape-e      (hiccup/merge-event-fn :on-escape-f      #(r/dispatch on-escape-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-keypress-events dispatch-keypress-events)
 
@@ -333,9 +335,9 @@
   ;  :on-unmount-f (function)
   ;  ...}
   [{:keys [on-mount-e on-unmount-e] :as props}]
-  (merge (if on-mount-e   {:on-mount-f    #(r/dispatch on-mount-e)})
-         (if on-unmount-e {:on-unmount-f  #(r/dispatch on-unmount-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-mount-e   (hiccup/merge-event-fn :on-mount-f    #(r/dispatch on-mount-e))
+                on-unmount-e (hiccup/merge-event-fn :on-unmount-f  #(r/dispatch on-unmount-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-lifecycle-events dispatch-lifecycle-events)
 
@@ -377,13 +379,13 @@
   ;  :on-right-click-f (function)
   ;  ...}
   [{:keys [on-click-e on-mouse-down-e on-mouse-leave-e on-mouse-over-e on-mouse-up-e on-right-click-e] :as props}]
-  (merge (if on-click-e       {:on-click-f       #(r/dispatch on-click-e)})
-         (if on-mouse-down-e  {:on-mouse-down-f  #(r/dispatch on-mouse-down-e)})
-         (if on-mouse-leave-e {:on-mouse-leave-f #(r/dispatch on-mouse-leave-e)})
-         (if on-mouse-over-e  {:on-mouse-over-f  #(r/dispatch on-mouse-over-e)})
-         (if on-mouse-up-e    {:on-mouse-up-f    #(r/dispatch on-mouse-up-e)})
-         (if on-right-click-e {:on-right-click-f #(r/dispatch on-right-click-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props on-click-e       (hiccup/merge-event-fn :on-click-f       #(r/dispatch on-click-e))
+                on-mouse-down-e  (hiccup/merge-event-fn :on-mouse-down-f  #(r/dispatch on-mouse-down-e))
+                on-mouse-leave-e (hiccup/merge-event-fn :on-mouse-leave-f #(r/dispatch on-mouse-leave-e))
+                on-mouse-over-e  (hiccup/merge-event-fn :on-mouse-over-f  #(r/dispatch on-mouse-over-e))
+                on-mouse-up-e    (hiccup/merge-event-fn :on-mouse-up-f    #(r/dispatch on-mouse-up-e))
+                on-right-click-e (hiccup/merge-event-fn :on-right-click-f #(r/dispatch on-right-click-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-mouse-events dispatch-mouse-events)
 
@@ -415,8 +417,8 @@
   ; {:set-reference-f (function)
   ;  ...}
   [{:keys [set-reference-e] :as props}]
-  (merge (if set-reference-e {:set-reference-f #(r/dispatch set-reference-e)})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props set-reference-e (assoc :set-reference-f #(r/dispatch set-reference-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-react-events dispatch-react-events)
 
@@ -455,12 +457,14 @@
   ;  :on-type-ended-f (function)
   ;  ...}
   [{:keys [value-path] :as props}]
+  ; @note (#5671)
+  ;
+  ; @note (#5672)
   ; Writes the current field value to the state when the user stops typing,
   ; reducing the frequency of dispatch events (for improved performance).
-  (merge (if value-path {:get-value-f     #(r/subscribed [:get-item  value-path])})
-         (if value-path {:on-blur-f       #(r/dispatch   [:set-item! value-path %])})
-         (if value-path {:on-type-ended-f #(r/dispatch   [:set-item! value-path %])})
-         (-> props)))
+  (cond-> props value-path (assoc                 :get-value-f     #(r/subscribed [:get-item value-path]))
+                value-path (hiccup/merge-event-fn :on-blur-f       #(r/dispatch   [:set-item! value-path %]))
+                value-path (hiccup/merge-event-fn :on-type-ended-f #(r/dispatch   [:set-item! value-path %]))))
 
 (pretty-presets/reg-preset! :pretty-state/subscribe-to-input-field-value subscribe-to-input-field-value)
 
@@ -497,9 +501,9 @@
   ;  :set-value-f (function)
   ;  ...}
   [{:keys [options-path value-path] :as props}]
-  (merge (if options-path {:get-options-f #(r/subscribed [:get-item  options-path])})
-         (if value-path   {:get-value-f   #(r/subscribed [:get-item  value-path])})
-         (if value-path   {:set-value-f   #(r/dispatch   [:set-item! value-path %])})
-         (-> props)))
+  ; @note (#5671)
+  (cond-> props options-path (assoc :get-options-f #(r/subscribed [:get-item  options-path]))
+                value-path   (assoc :get-value-f   #(r/subscribed [:get-item  value-path]))
+                value-path   (assoc :set-value-f   #(r/dispatch   [:set-item! value-path %]))))
 
 (pretty-presets/reg-preset! :pretty-state/subscribe-to-input-options subscribe-to-input-options)
