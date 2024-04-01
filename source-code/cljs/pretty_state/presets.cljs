@@ -2,6 +2,7 @@
 (ns pretty-state.presets
     (:require [pretty-presets.api :as pretty-presets]
               [re-frame.extra.api :as r]
+              [re-frame.tools.api :as re-frame.tools]
               [fruits.hiccup.api :as hiccup]))
 
 ;; ----------------------------------------------------------------------------
@@ -36,8 +37,8 @@
   [{:keys [on-blur-e on-focus-e] :as props}]
   ; @note (#5671)
   ; 'set-*' and 'get-*' functions are exclusively overriden by handlers, while 'on-*' functions are extended with handlers.
-  (cond-> props on-blur-e  (hiccup/merge-event-fn :on-blur-f  #(r/dispatch on-blur-e))
-                on-focus-e (hiccup/merge-event-fn :on-focus-f #(r/dispatch on-focus-e))))
+  (cond-> props on-blur-e  (hiccup/merge-event-fn :on-blur-f  #(-> on-blur-e  (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-focus-e (hiccup/merge-event-fn :on-focus-f #(-> on-focus-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-focus-events dispatch-focus-events)
 
@@ -70,7 +71,7 @@
   ;  ...}
   [{:keys [on-error-e on-unerror-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-error-e (hiccup/merge-event-fn :on-error-f #(r/dispatch on-error-e))))
+  (cond-> props on-error-e (hiccup/merge-event-fn :on-error-f #(-> on-error-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-image-events dispatch-image-events)
 
@@ -109,10 +110,10 @@
   ;  ...}
   [{:keys [on-change-e on-empty-e on-input-e on-type-ended-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-change-e     (hiccup/merge-event-fn :on-change-f     #(r/dispatch on-change-e))
-                on-empty-e      (hiccup/merge-event-fn :on-empty-f      #(r/dispatch on-empty-e))
-                on-input-e      (hiccup/merge-event-fn :on-input-f      #(r/dispatch on-input-e))
-                on-type-ended-e (hiccup/merge-event-fn :on-type-ended-f #(r/dispatch on-type-ended-e))))
+  (cond-> props on-change-e     (hiccup/merge-event-fn :on-change-f     #(-> on-change-e     (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-empty-e      (hiccup/merge-event-fn :on-empty-f      #(-> on-empty-e      (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-input-e      (hiccup/merge-event-fn :on-input-f      #(-> on-input-e      (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-type-ended-e (hiccup/merge-event-fn :on-type-ended-f #(-> on-type-ended-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-field-events dispatch-input-field-events)
 
@@ -147,8 +148,8 @@
   ;  ...}
   [{:keys [on-decreased-e on-increased-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-decreased-e (hiccup/merge-event-fn :on-decreased-f #(r/dispatch on-decreased-e))
-                on-increased-e (hiccup/merge-event-fn :on-increased-f #(r/dispatch on-increased-e))))
+  (cond-> props on-decreased-e (hiccup/merge-event-fn :on-decreased-f #(-> on-decreased-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-increased-e (hiccup/merge-event-fn :on-increased-f #(-> on-increased-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-numeric-events dispatch-input-numeric-events)
 
@@ -183,8 +184,8 @@
   ;  ...}
   [{:keys [on-selected-e on-unselected-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-selected-e   (hiccup/merge-event-fn :on-selected-f   #(r/dispatch on-selected-e))
-                on-unselected-e (hiccup/merge-event-fn :on-unselected-f #(r/dispatch on-unselected-e))))
+  (cond-> props on-selected-e   (hiccup/merge-event-fn :on-selected-f   #(-> on-selected-e   (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-unselected-e (hiccup/merge-event-fn :on-unselected-f #(-> on-unselected-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-option-events dispatch-input-option-events)
 
@@ -219,8 +220,8 @@
   ;  ...}
   [{:keys [on-invalid-e on-valid-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-invalid-e (hiccup/merge-event-fn :on-invalid-f #(r/dispatch on-invalid-e))
-                on-valid-e   (hiccup/merge-event-fn :on-valid-f   #(r/dispatch on-valid-e))))
+  (cond-> props on-invalid-e (hiccup/merge-event-fn :on-invalid-f #(-> on-invalid-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))
+                on-valid-e   (hiccup/merge-event-fn :on-valid-f   #(-> on-valid-e   (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-validation-events dispatch-input-validation-events)
 
@@ -253,7 +254,7 @@
   ;  ...}
   [{:keys [set-value-e] :as props}]
   ; @note (#5671)
-  (cond-> props set-value-e (assoc :set-value-f  #(r/dispatch set-value-e))))
+  (cond-> props set-value-e (assoc :set-value-f #(-> set-value-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-input-value-events dispatch-input-value-events)
 
@@ -336,8 +337,8 @@
   ;  ...}
   [{:keys [on-mount-e on-unmount-e] :as props}]
   ; @note (#5671)
-  (cond-> props on-mount-e   (hiccup/merge-event-fn :on-mount-f    #(r/dispatch on-mount-e))
-                on-unmount-e (hiccup/merge-event-fn :on-unmount-f  #(r/dispatch on-unmount-e))))
+  (cond-> props on-mount-e   (hiccup/merge-event-fn :on-mount-f   #(r/dispatch on-mount-e))
+                on-unmount-e (hiccup/merge-event-fn :on-unmount-f #(r/dispatch on-unmount-e))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-lifecycle-events dispatch-lifecycle-events)
 
@@ -404,21 +405,21 @@
   ; Dispatches react events as [Re-Frame metamorphic events](https://mt-extensions.github.io/re-frame-extra).
   ;
   ; @param (map) props
-  ; {:set-reference-e (Re-Frame metamorphic event)(opt)
+  ; {:store-reference-e (Re-Frame metamorphic event)(opt)
   ;  ...}
   ;
   ; @usage
-  ; (dispatch-react-events {:set-reference-e [:my-event] ...})
+  ; (dispatch-react-events {:store-reference-e [:my-event] ...})
   ; =>
-  ; {:set-reference-f #(dispatch [:my-event])
+  ; {:store-reference-f #(dispatch [:my-event])
   ;  ...}
   ;
   ; @return (map)
-  ; {:set-reference-f (function)
+  ; {:store-reference-f (function)
   ;  ...}
-  [{:keys [set-reference-e] :as props}]
+  [{:keys [store-reference-e] :as props}]
   ; @note (#5671)
-  (cond-> props set-reference-e (assoc :set-reference-f #(r/dispatch set-reference-e))))
+  (cond-> props store-reference-e (assoc :store-reference-f #(-> store-reference-e (re-frame.tools/metamorphic-event<-params %) r/dispatch))))
 
 (pretty-presets/reg-preset! :pretty-state/dispatch-react-events dispatch-react-events)
 

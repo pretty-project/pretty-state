@@ -73,9 +73,9 @@
 ;
 ; @usage
 ; (re-frame.core/reg-event-fx :my-event (fn [_ _] {:dispatch ...}))
-; [button {:label           "My button"
-;          :set-reference-e [:my-event]
-;          :presets         [:pretty-state/dispatch-react-events]}]
+; [button {:label             "My button"
+;          :store-reference-e [:my-event]
+;          :presets           [:pretty-state/dispatch-react-events]}]
 ;
 ; @usage
 ; [field {:presets    [:pretty-state/subscribe-to-input-field-value]

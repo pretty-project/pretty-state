@@ -1,9 +1,9 @@
 
 {:paths ["source-code/cljs"]
  :deps  {bithandshake/cljc-fruits     {:git/url "https://github.com/bithandshake/cljc-fruits"
-                                       :sha     "dfe050b99bce6217784e15ea08c41618a78b810b"}
+                                       :sha     "e2fb9d3ec28fb80d464ee31a73f6d999b4a7bd87"}
          mt-extensions/re-frame-extra {:git/url "https://github.com/mt-extensions/re-frame-extra"
-                                       :sha     "82b4c65ee5acab298591315069be55bf1adb25aa"}
+                                       :sha     "697d14f8e5a55ea7b816481e9f37d61e11b7c2a9"}
          org.clojure/clojurescript     {:mvn/version "1.10.891"}}}
 
 ; + pretty-presets
